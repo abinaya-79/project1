@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Detox Planner</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "your-key",
+    authDomain: "your-app.firebaseapp.com",
+    projectId: "your-id",
+    storageBucket: "your-bucket",
+    messagingSenderId: "xxx",
+    appId: "xxx"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+</head>
+<body>
+  <header>
+    <h1>🌿 Digital Detox Planner</h1>
+  </header>
+  
+  <main>
+    <section id="tracker">
+      <h2>Log Screen Time</h2>
+      <input type="number" id="screenTimeInput" placeholder="Hours spent on screen today" />
+      <button onclick="logScreenTime()">Log</button>
+      <p id="feedback"></p>
+    </section>
+    <section id="daily-log">
+      <h2>📝 Daily Detox Log</h2>
+      <textarea id="logEntry" rows="5" placeholder="What did you do offline today? How did it feel?"></textarea>
+      <br />
+      <button onclick="saveLog()">Save Log</button>
+      
+      <h3>📅 Previous Logs</h3>
+      <ul id="logList"></ul>
+    </section>
+    <section id="suggestions">
+      <h2>✨ Offline Activity Suggestions</h2>
+      <ul id="activityList"></ul>
+      <button onclick="getRandomActivity()">New Suggestion</button>
+    </section>
+    <section id="progress">
+      <h2>📈 Your Detox Progress</h2>
+      <canvas id="progressChart" width="400" height="200"></canvas>
+    </section>
+    
+</main>
+
+  <script src="script.js"></script>
+</body>
+</html>
