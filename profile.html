@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Detox - Profile</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #ffffff;
+      box-shadow: 2px 0 12px rgba(0,0,0,0.1);
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .sidebar input[type="file"] {
+      margin-bottom: 20px;
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      color: #5a189a;
+      margin-bottom: 10px;
+    }
+
+    .menu {
+      margin-top: 30px;
+      width: 100%;
+    }
+
+    .menu button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #6a4c93;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .menu button:hover {
+      background-color: #5a3d80;
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px 60px;
+    }
+
+    .section h1 {
+      font-size: 32px;
+      color: #222;
+      margin-bottom: 30px;
+    }
+
+    .info-box {
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      font-size: 18px;
+      max-width: 600px;
+    }
+
+    .info-item {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <img id="profilePic" src="https://via.placeholder.com/120" alt="Profile Pic">
+    <input type="file" id="uploadPic" accept="image/*" onchange="previewPic(event)">
+    <h2 id="userName">Abhii</h2>
+
+    <div class="menu">
+      <button onclick="location.href='profile.html'">Profile</button>
+      <button onclick="location.href='changepassword.html'">Change Password</button>
+      <button onclick="location.href='about.html'">About App</button>
+      <button onclick="logout()" style="background-color: #999">Log Out</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="section">
+      <h1>Your Profile</h1>
+      <div class="info-box">
+        <p class="info-item"><strong>Username:</strong> <span id="profileUsername">abhii_user</span></p>
+        <p class="info-item"><strong>Email:</strong> <span id="profileEmail">abhii@example.com</span></p>
+        <p class="info-item"><strong>Name:</strong> <span id="profileName">Abhii</span></p>
+        <p class="info-item"><strong>Age:</strong> <span id="profileAge">21</span></p>
+        <p class="info-item"><strong>About:</strong> <span id="profileAbout">Here to take a break from tech and detox my digital life ✨</span></p>
+        <br>
+        <button onclick="logout()" style="padding: 10px 16px; font-size: 16px; background-color: #999; color: white; border: none; border-radius: 6px; cursor: pointer;">Log Out</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("userProfile"));
+    if (user) {
+      document.getElementById("profileName").innerText = user.name;
+      document.getElementById("profileEmail").innerText = user.email;
+      document.getElementById("userName").innerText = user.name;
+      document.getElementById("profileUsername").innerText = user.username || "abhii_user";
+      document.getElementById("profileAge").innerText = user.age || "21";
+      document.getElementById("profileAbout").innerText = user.about || "Here to take a break from tech and detox my digital life ✨";
+
+      if (user.profilePic) {
+        document.getElementById("profilePic").src = user.profilePic;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("userProfile");
+      alert("Logged out successfully!");
+      window.location.href = "index.html";
+    }
+
+    function previewPic(event) {
+      const reader = new FileReader();
+      reader.onload = function() {
+        const profilePic = document.getElementById("profilePic");
+        profilePic.src = reader.result;
+
+        if (user) {
+          user.profilePic = reader.result;
+          localStorage.setItem("userProfile", JSON.stringify(user));
+        }
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  </script>
+
+</body>
+</html>

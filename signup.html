@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - Digital Detox</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .signup-box {
+      background-color: #ffffffcc;
+      padding: 50px;
+      border-radius: 24px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 36px;
+      color: #e65100;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: 16px;
+      background-color: #ff7043;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #d84315;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-box">
+    <!-- Inside the .signup-container -->
+<h2>Create Your Detox Account 🌿</h2>
+
+<input type="email" id="email" placeholder="Email" required>
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="number" id="age" placeholder="Age" required>
+<input type="text" id="username" placeholder="Username" required>
+
+<div class="password-wrapper">
+  <input type="password" id="password" placeholder="Password" required>
+  <span class="toggle-eye" onclick="togglePassword()">👁</span>
+</div>
+
+<button onclick="signup()">Sign Up</button>
+
+  </div>
+
+  <script>
+     function togglePassword() {
+    const pwd = document.getElementById("password");
+    pwd.type = pwd.type === "password" ? "text" : "password";
+  }
+
+  function signup() {
+    const user = {
+      email: document.getElementById("email").value,
+      name: document.getElementById("name").value,
+      age: document.getElementById("age").value,
+      username: document.getElementById("username").value,
+      password: document.getElementById("password").value
+    };
+
+    // Check if all fields are filled (optional but nice)
+    if (!user.email || !user.name || !user.age || !user.username || !user.password) {
+      alert("Please fill in all fields!");
+      return;
+    }
+
+    // Save to localStorage
+    localStorage.setItem("userProfile", JSON.stringify(user));
+
+    // Redirect to profile page
+    window.location.href = "screen-time.html";
+  }
+  </script>
+
+</body>
+</html>

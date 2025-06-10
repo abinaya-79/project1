@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Screen Time Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .profile-icon {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.profile-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #f6d365, #fda085);
+      padding: 40px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 20px;
+      color: #333;
+    }
+
+    .chart-container {
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    canvas {
+      max-width: 100%;
+    }
+
+    .change-button {
+      margin-top: 40px;
+      background: #6a4c93;
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .change-button:hover {
+      background: #5a3d80;
+    }
+  </style>
+</head>
+<body>
+    <!-- Profile Icon Top Right -->
+<div class="profile-icon" onclick="location.href='profile.html'">
+  <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" />
+</div>
+  <h1>📱 Digital Detox Dashboard</h1>
+
+  <div class="chart-container">
+    <h2>Today's Screen Time Breakdown</h2>
+    <canvas id="dailyChart"></canvas>
+  </div>
+
+  <div class="chart-container">
+    <h2>Monthly Total Screen Time</h2>
+    <canvas id="monthlyChart"></canvas>
+  </div>
+
+  <!-- 🌟 Ready for Change button -->
+  <button class="change-button" onclick="location.href='change-ideas.html'">
+    🌟 Ready for Change!
+  </button>
+
+  <script>
+    const screenTime = JSON.parse(localStorage.getItem("screenTime"));
+    const history = JSON.parse(localStorage.getItem("monthlyScreenTime")) || [];
+
+    const today = new Date().toISOString().split("T")[0];
+    const alreadyExists = history.find(entry => entry.date === today);
+    if (!alreadyExists && screenTime) {
+      history.push({ date: today, total: screenTime.total });
+      localStorage.setItem("monthlyScreenTime", JSON.stringify(history));
+    }
+
+    const dailyCtx = document.getElementById('dailyChart').getContext('2d');
+    const dailyChart = new Chart(dailyCtx, {
+      type: 'pie',
+      data: {
+        labels: ['Social Media', 'Gaming', 'Other'],
+        datasets: [{
+          data: [screenTime?.social || 0, screenTime?.gaming || 0, screenTime?.others || 0],
+          backgroundColor: ['#6a4c93', '#f67280', '#ffa600']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    });
+
+    const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+    const monthlyChart = new Chart(monthlyCtx, {
+      type: 'line',
+      data: {
+        labels: history.map(entry => entry.date),
+        datasets: [{
+          label: 'Total Screen Time (hrs)',
+          data: history.map(entry => entry.total),
+          borderColor: '#6a4c93',
+          backgroundColor: 'rgba(106, 76, 147, 0.1)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 24
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

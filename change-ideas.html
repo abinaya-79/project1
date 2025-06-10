@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ready for Change</title>
+  <style>
+    .profile-icon {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.profile-icon img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #a18cd1, #fbc2eb);
+      color: #333;
+      padding: 50px 30px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 40px;
+      color: #4a148c;
+    }
+
+    .grid-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .column {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #6a4c93;
+    }
+
+    .card p {
+      font-size: 15.5px;
+      line-height: 1.6;
+    }
+
+    .back-btn {
+      margin-top: 40px;
+      background: #6a4c93;
+      color: white;
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background: #59377b;
+    }
+  </style>
+</head>
+<body>
+<!-- Profile Icon Top Right -->
+<div class="profile-icon" onclick="location.href='profile.html'">
+  <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" />
+</div>
+  <h1>🌿 Take a Digital Break</h1>
+
+  <div class="grid-container">
+    <div class="column">
+      <div class="card">
+        <h3>📚 Read a Book</h3>
+        <p>Get lost in a story or learn something new—books are the OG screen-free escape.</p>
+      </div>
+      <div class="card">
+        <h3>🚶‍♂️ Go for a Walk</h3>
+        <p>Stretch your legs and let nature refresh your mind—leave your phone behind!</p>
+      </div>
+      <div class="card">
+        <h3>🎨 Be Creative</h3>
+        <p>Paint, draw, doodle, or build—let your imagination have some offline fun.</p>
+      </div>
+      <div class="card">
+        <h3>🧘 Mindfulness & Meditation</h3>
+        <p>Deep breaths. Quiet space. Peaceful vibes. A few minutes of calm does wonders.</p>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="card">
+        <h3>💬 IRL Hangouts</h3>
+        <p>Call up your besties, go out for chai, or just vibe offline with real convos.</p>
+      </div>
+      <div class="card">
+        <h3>🏸 Get Moving</h3>
+        <p>Try yoga, dance, sports, or even a quick stretch. Your body will thank you!</p>
+      </div>
+      <div class="card">
+        <h3>🎧 Listen Without Screens</h3>
+        <p>Put on a podcast or music and lie back. No scrolling, just chilling.</p>
+      </div>
+      <div class="card">
+        <h3>✍️ Journal or Brain Dump</h3>
+        <p>Write down your thoughts, dreams, rants—whatever's in your head, let it out.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 60px;">
+  <h2 style="color: #333;">You're making progress! Wanna tell us what you think?</h2>
+  <button onclick="location.href='feedback.html'" 
+    style="margin-top: 20px; padding: 12px 24px; background-color: #6a4c93; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">
+    Give Feedback
+  </button>
+</div>
+
+
+</body>
+</html>
